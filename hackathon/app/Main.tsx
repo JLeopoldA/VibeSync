@@ -12,6 +12,10 @@ const MainContent = ({ isWalletConnected }: any) => {
     alert('View Events Clicked');
   };
 
+  const handleSubmitEventClick = () => {
+    // Implement Post Logic here to MINT NFT
+  }
+
   return (
     <main className="flex-grow flex items-center justify-center">
       <div className="max-w-4xl w-full p-4">
@@ -104,6 +108,14 @@ const MainContent = ({ isWalletConnected }: any) => {
                       type="text"
                       className="w-full p-2 border border-gray-300 rounded-md"
                       placeholder="Enter DJ name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700">DJ Description</label>
+                    <input
+                        type="text"
+                        className="w-full p-2 border border-gray-300 rounded-md"
+                        placeholder="Enter DJ description"
                     />
                   </div>
                   <div>
