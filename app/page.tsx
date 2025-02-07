@@ -1,32 +1,33 @@
-'use client';  
+'use client';
 
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { useRouter, usePathname } from 'next/navigation';
 import Header from './Header';
 import MainContent from './Main';
 import SignedInPage from './Dashboard';
 
 const App = () => {
   const [isWalletConnected, setIsWalletConnected] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname(); // Get current route
 
   const handleWalletConnect = () => {
     setIsWalletConnected(true);
+    router.push('/signed-in'); // Navigate to signed-in page
   };
 
   const handleWalletDisconnect = () => {
     setIsWalletConnected(false);
+    router.push('/'); // Navigate back to home
   };
 
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
-        <Header onConnect={handleWalletConnect} onDisconnect={handleWalletDisconnect} />
-        <Routes>
-          <Route path="/" element={<MainContent isWalletConnected={isWalletConnected} />} />
-          <Route path="/signed-in" element={<SignedInPage />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="flex flex-col min-h-screen font-sans dark:bg-background dark:text-white bg-white text-black">
+      <Header onConnect={handleWalletConnect} onDisconnect={handleWalletDisconnect} />
+
+      {pathname === '/' && <MainContent isWalletConnected={isWalletConnected} />}
+      {pathname === '/signed-in' && <SignedInPage />}
+    </div>
   );
 };
 
