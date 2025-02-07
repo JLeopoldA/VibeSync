@@ -1,4 +1,4 @@
-import fs from 'fs';
+import { useEffect } from 'react';
 import { runForgeCommands } from './SecretFunction';
 
 function generateERC721Contract(contractName: string, symbol: string): string {
@@ -50,7 +50,11 @@ export async function saveContractToFile(
     let contractName = `${showTitle}: ${djName} in ${location}`; 
     let symbol = `${djName}_${dateTime}`;
     const contractCode = generateERC721Contract(contractName, symbol);
-    fs.writeFileSync(`${symbol}.sol`, contractCode);
+    useEffect(() => {
+        import("fs").then((fs) => {
+            fs.writeFileSync(`${symbol}.sol`, contractCode);
+        });
+    }, []);
     //await runForgeCommands(contractName, )
 }
 
