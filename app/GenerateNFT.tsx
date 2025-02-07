@@ -1,3 +1,4 @@
+"use server";
 import { useEffect } from 'react';
 import { runForgeCommands } from './SecretFunction';
 
