@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
+import { saveContractToFile } from './GenerateNFT';
 
 const MainContent = ({ isWalletConnected }: any) => {
+  const [genre, setGenre] = useState("");
+  const [theme, setTheme] = useState("");
+  const [showTitle, setShowTitle] = useState("");
+  const [location, setLocation] = useState("");
+  const [dateTime, setDateTime] = useState("");
+  const [setDuration, setSetDuration] = useState("");
+  const [ticketCost, setTicketCost] = useState("");
+  const [djName, setDjName] = useState("");
+  const [djDescription, setDjDescription] = useState("");
+  const [djLinks, setDjLinks] = useState("");
+  const [mintWindowLength, setMintWindowLength] = useState("");
   const [isCreatingEvent, setIsCreatingEvent] = useState(false);
 
   const handleCreateEventClick = () => {
@@ -11,6 +23,38 @@ const MainContent = ({ isWalletConnected }: any) => {
     // Implement the functionality to view events if needed
     alert('View Events Clicked');
   };
+
+  const handleSubmitEventClick = async (event: React.FormEvent<HTMLFormElement>) => {
+    // Implement Post Logic here to MINT NFT
+    // IMPLEMENT SAVE CONTRACT TO FILE HERE
+    event.preventDefault();
+    const eventData = {
+        genre,
+        theme,
+        showTitle,
+        location,
+        dateTime,
+        setDuration,
+        ticketCost,
+        djName,
+        djDescription,
+        djLinks,
+        mintWindowLength,
+      };
+    await saveContractToFile(
+        eventData.genre,
+        eventData.theme,
+        eventData.showTitle,
+        eventData.location,
+        eventData.dateTime,
+        eventData.setDuration,
+        eventData.ticketCost,
+        eventData.djName,
+        eventData.djDescription,
+        eventData.djLinks,
+        eventData.mintWindowLength    
+    );
+  }
 
   return (
     <main className="flex-grow flex items-center justify-center">
@@ -49,6 +93,7 @@ const MainContent = ({ isWalletConnected }: any) => {
                       type="text"
                       className="w-full p-2 border border-gray-300 rounded-md"
                       placeholder="Enter genre"
+                      
                     />
                   </div>
                   <div>
@@ -78,14 +123,14 @@ const MainContent = ({ isWalletConnected }: any) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Date / Time</label>
                     <input
-                      type="datetime-local"
+                      type="text"
                       className="w-full p-2 border border-gray-300 rounded-md"
                     />
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Set Duration (hours)</label>
                     <input
-                      type="number"
+                      type="text"
                       className="w-full p-2 border border-gray-300 rounded-md"
                       placeholder="Enter set duration"
                     />
@@ -93,7 +138,7 @@ const MainContent = ({ isWalletConnected }: any) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Ticket Cost</label>
                     <input
-                      type="number"
+                      type="text"
                       className="w-full p-2 border border-gray-300 rounded-md"
                       placeholder="Enter ticket cost"
                     />
@@ -107,6 +152,14 @@ const MainContent = ({ isWalletConnected }: any) => {
                     />
                   </div>
                   <div>
+                    <label className="block text-sm font-medium text-gray-700">DJ Description</label>
+                    <input
+                        type="text"
+                        className="w-full p-2 border border-gray-300 rounded-md"
+                        placeholder="Enter DJ description"
+                    />
+                  </div>
+                  <div>
                     <label className="block text-sm font-medium text-gray-700">DJ Links</label>
                     <input
                       type="url"
@@ -117,7 +170,7 @@ const MainContent = ({ isWalletConnected }: any) => {
                   <div>
                     <label className="block text-sm font-medium text-gray-700">Mint Window Length</label>
                     <input
-                      type="number"
+                      type="text"
                       className="w-full p-2 border border-gray-300 rounded-md"
                       placeholder="Enter mint window length in hours"
                     />
@@ -127,6 +180,7 @@ const MainContent = ({ isWalletConnected }: any) => {
                     <button
                       type="submit"
                       className="px-6 py-2 bg-blue-500 text-white rounded-lg"
+                    //   onClick={}
                     >
                       Submit Event
                     </button>
