@@ -34,7 +34,7 @@ import { runForgeCommands } from './SecretFunction';
 //     return contractCode;
 // }
 
-async function saveNFTContract(data) {
+async function saveNFTContract(data: { contractName: string; symbol: string; }) {
     const response = await fetch("/api/saveContract", {
         method: "POST",
         headers: {
@@ -65,6 +65,8 @@ export async function saveContractToFile(
         symbol: symbol
     };
     await saveNFTContract(data);
+    
+    
     // const contractCode = generateERC721Contract(contractName, symbol);
     // useEffect(() => {
     //     import("fs").then((fs) => {
